@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import {Layout} from '../components';
 
 export default function Home() {
     return (
@@ -7,7 +8,9 @@ export default function Home() {
                 <title>IP Tracker</title>
                 <link rel="icon" href="/favicon.png" />
             </Head>
-            <h1>Hello, World!</h1>
+            <Layout>
+                <h1>Hello, World!</h1>
+            </Layout>
         </>
     )
 }

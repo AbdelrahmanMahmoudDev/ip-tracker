@@ -13,3 +13,39 @@
     -o-transform: translate(-50%, -50%);
     z-index: 1000;
 }
+
+.infoHolder ul {
+    display:flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0;
+}
+
+.infoHolder ul li {
+    position: relative;
+}
+
+.infoHolder ul li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    background-color: hsl(0, 0%, 59%);
+    width: 1px;
+    height: calc(100% - 40px);
+    top: 50%;
+    transform: translateY(-50%);
+    right: -40px;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+}
+
+.infoHolder ul li h6 {
+    text-transform: uppercase;
+    color: hsl(0, 0%, 59%);
+}
+
+.infoHolder ul li p {
+    font-weight: 700;
+    font-size: 1.5rem;
+}

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import "leaflet/dist/leaflet.css"
+import {InfoDisplay} from '../../../components';
 
 const MapNoSSR = dynamic(() => import("../../../components/Map/map"), {
     ssr: false
@@ -8,6 +8,7 @@ const MapNoSSR = dynamic(() => import("../../../components/Map/map"), {
 export function Main() {
     return (
         <>
+            <InfoDisplay />
             <MapNoSSR />
         </>
     )

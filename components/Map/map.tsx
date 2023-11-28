@@ -1,9 +1,10 @@
 import { MapContainer, TileLayer } from 'react-leaflet'
 import styles from "./map.module.css"
+import "leaflet/dist/leaflet.css"
 
 // WARNING
 // This component must be lazy loaded because Leaflet doesn't support SSR!
-// That's why it can be used in barrel imports and has to be explicitly
+// That's why it can't be used in barrel imports and has to be explicitly
 // imported wherever used
 
 export default function Map() {

@@ -1,2 +1,2 @@
 export {Layout} from "./Layout/layout"
-// export {Map} from './Map/map'
+export {InfoDisplay} from "./InfoDisplay/infoDisplay"

@@ -32,6 +32,10 @@
     border-bottom-left-radius: 10px;
 }
 
+.header input:focus {
+    outline: 0;
+}
+
 .header button {
     background-color: #000;
     border-top-right-radius: 10px;

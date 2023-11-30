@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import {Header, Main} from "./Home"
+import {IpContextProvider} from '../contexts/ipContext'
 
 export default function Composite() {
     return (
@@ -8,8 +9,10 @@ export default function Composite() {
                 <title>IP Tracker</title>
                 <link rel="icon" href="/favicon.png" />
             </Head>
-            <Header />
-            <Main />
+            <IpContextProvider>
+                <Header />
+                <Main />
+            </IpContextProvider>
         </>
     )
 }

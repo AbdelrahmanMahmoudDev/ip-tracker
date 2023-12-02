@@ -2,6 +2,7 @@ import Image from 'next/image';
 import {Layout} from '../../../components';
 import styles from './header.module.css';
 import { useIpProvider } from '../../../contexts/ipContext';
+import {useState} from 'react';
 
 function ErrorMessage({message}: {message: string}) {
     return <p style={{color: "red", fontWeight: "700", textAlign: "center"}}>{message}</p>
@@ -9,15 +10,17 @@ function ErrorMessage({message}: {message: string}) {
 
 export function Header() {
     const {ipData, updateIp, updateClickState, updateIsValid, updateIsCustomInput} = useIpProvider();
+    const [userInput, setUserInput] = useState("");
     function onUserInput(event: any) {
-        event.target.value !== "" ? updateIp(event.target.value) : updateIsCustomInput(false);
+        event.target.value !== "" ? setUserInput(event.target.value) : updateIsCustomInput(false);
     }
     function onButtonClick(): any {
         updateClickState(true);
         const ipv4Pattern = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-        if(ipv4Pattern.test(ipData.ipAddress)) {
+        if(ipv4Pattern.test(userInput)) {
             updateIsValid(true);
             updateIsCustomInput(true);
+            updateIp(userInput);
         } else {
             updateIsValid(false);
             updateClickState(false);

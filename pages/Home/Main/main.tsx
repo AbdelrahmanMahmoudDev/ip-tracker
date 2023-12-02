@@ -65,7 +65,7 @@ function InputDisplay({inputIp}: {inputIp: string}) {
     )
 }
 
-export function Main() {
+export default function Main() {
     const {ipData} = useIpProvider();
     return (
         <>

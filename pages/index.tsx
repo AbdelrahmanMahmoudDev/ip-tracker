@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import {Header, Main} from "./Home"
+import Header from "./Home/Header/header"
+import Main from "./Home/Main/main"
 import {IpContextProvider} from '../contexts/ipContext'
 
 export default function Composite() {

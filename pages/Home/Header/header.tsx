@@ -4,7 +4,7 @@ import styles from './header.module.css';
 import { useIpProvider } from '../../../contexts/ipContext';
 import {useState} from 'react';
 
-export function Header() {
+export default function Header() {
     const {ipData, updateIp, updateClickState, updateIsValid, updateIsCustomInput} = useIpProvider();
     const [userInput, setUserInput] = useState("");
     function onUserInput(event: any) {

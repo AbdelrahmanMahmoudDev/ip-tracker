@@ -1,8 +1,10 @@
 import styles from "./infoDisplay.module.css"
+import {Layout} from "../Layout/layout"
 
 export function InfoDisplay({userData}: {userData: any}) {
     return (
         <section className={styles.infoHolder}>
+            <Layout>
             <ul>
                 <li>
                     <h6>ip address</h6>
@@ -22,6 +24,7 @@ export function InfoDisplay({userData}: {userData: any}) {
                     <p>{userData.isp}</p>
                 </li>
             </ul>
+        </Layout>
         </section>
     )
 }

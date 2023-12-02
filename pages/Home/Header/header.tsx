@@ -3,16 +3,24 @@ import {Layout} from '../../../components';
 import styles from './header.module.css';
 import { useIpProvider } from '../../../contexts/ipContext';
 
+function ErrorMessage({message}: {message: string}) {
+    return <p style={{color: "red", fontWeight: "700", textAlign: "center"}}>{message}</p>
+}
+
 export function Header() {
-    const {ipData, updateIp, updateClickState} = useIpProvider();
+    const {ipData, updateIp, updateClickState, updateIsValid, updateIsCustomInput} = useIpProvider();
     function onUserInput(event: any) {
-        updateIp(event.target.value);
+        event.target.value !== "" ? updateIp(event.target.value) : updateIsCustomInput(false);
     }
     function onButtonClick(): any {
+        updateClickState(true);
         const ipv4Pattern = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         if(ipv4Pattern.test(ipData.ipAddress)) {
-            updateClickState(!ipData.isClicked);
-            console.log(!ipData)
+            updateIsValid(true);
+            updateIsCustomInput(true);
+        } else {
+            updateIsValid(false);
+            updateClickState(false);
         }
     }
     return (
@@ -21,6 +29,7 @@ export function Header() {
                 <section>
                     <h1>ip address tracker</h1>
                     <div className={styles.inputSection}>
+                        {!ipData.isValid && ipData.isClicked && <ErrorMessage message="Please enter a valid IP address!" />}
                         <input type="text" id="ip" name="ip" required
                         onChange={e => onUserInput(e)}
                         placeholder="Search for any IP address or domain" />

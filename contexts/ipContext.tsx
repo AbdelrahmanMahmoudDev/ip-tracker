@@ -6,6 +6,8 @@ export const IpContextProvider = ({children}: any) => {
     const [ipData, setIpData] = useState({
         isClicked: false,
         ipAddress: "",
+        isValid: false,
+        isCustomInput: false,
     })
 
     const updateIp = (newIp: string) => {
@@ -22,10 +24,26 @@ export const IpContextProvider = ({children}: any) => {
         }))
     }
 
+    const updateIsValid = (newBool: boolean) => {
+        setIpData(prevData => ({
+            ...prevData,
+            isValid: newBool
+        }))
+    }
+
+    const updateIsCustomInput = (newBool: boolean) => {
+        setIpData(prevData => ({
+            ...prevData,
+            isCustomInput: newBool,
+        }))
+    }
+
     const contextVal = {
         ipData,
         updateIp,
-        updateClickState
+        updateClickState,
+        updateIsValid,
+        updateIsCustomInput
     }
 
     return (

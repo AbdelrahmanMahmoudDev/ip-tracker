@@ -52,7 +52,7 @@ function DefaultDisplay() {
     }
 }
 
-function InputDisplay({inputIp}: {inputIp: string}) {
+function InputDisplay({inputIp = ""}: {inputIp: string}) {
     const {userData, getError, loading} = useSWRInputData(inputIp);
 
     if(getError) return <p style={{color: "red", fontWeight: 700, textAlign: "center"}}>Failed to load</p>;
@@ -66,11 +66,11 @@ function InputDisplay({inputIp}: {inputIp: string}) {
 }
 
 export default function Main() {
-    const {ipData} = useIpProvider();
+    const {ipData} = useIpProvider() || {};
     return (
         <>
-            {!ipData.isCustomInput && <DefaultDisplay />}
-            {ipData.isCustomInput && <InputDisplay inputIp={ipData.ipAddress} />}
+            {ipData && !ipData.isCustomInput && <DefaultDisplay />}
+            {ipData && ipData.isCustomInput && <InputDisplay inputIp={ipData.ipAddress} />}
         </>
     )
 }0

@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useIpProvider } from '../../../contexts/ipContext';
 
 
-const apiKey = "at_rtj7CKoS50MByFdyBuSYI1bo7FFHB";
+const apiKey = "at_81MD04mBsJocKh8JiXuBN9OmwauuC";
 
 function useSWRDefaultData(): any {
     const defaultIpURL = 'https://api.ipify.org?format=json'
@@ -42,12 +42,14 @@ function DefaultDisplay() {
 
     if(getError) return <p style={{color: "red", fontWeight: 700, textAlign: "center"}}>Failed to load</p>;
     if(loading) return <p style={{color: "green", fontWeight: 700, textAlign: "center"}}>Loading...</p>;
-    return (
-        <>
-            <InfoDisplay userData={userData}/>
-            <MapNoSSR latitude={userData.location.lat} longitude={userData.location.lng}/>
-        </>
-    )
+    if(userData) {
+        return (
+            <>
+                <InfoDisplay userData={userData}/>
+                <MapNoSSR latitude={userData.location.lat} longitude={userData.location.lng}/>
+            </>
+        )
+    }
 }
 
 function InputDisplay({inputIp}: {inputIp: string}) {
@@ -55,10 +57,10 @@ function InputDisplay({inputIp}: {inputIp: string}) {
 
     if(getError) return <p style={{color: "red", fontWeight: 700, textAlign: "center"}}>Failed to load</p>;
     if(loading) return <p style={{color: "green", fontWeight: 700, textAlign: "center"}}>Loading...</p>;
-    return (
+    if(userData) return (
         <>
-            {userData && <InfoDisplay userData={userData}/>}
-            {userData.location.lat && userData.location.lng && <MapNoSSR latitude={userData.location.lat} longitude={userData.location.lng}/>}
+            {<InfoDisplay userData={userData}/>}
+            {<MapNoSSR latitude={userData.location.lat} longitude={userData.location.lng}/>}
         </>
     )
 }

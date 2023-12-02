@@ -52,14 +52,13 @@ function DefaultDisplay() {
 
 function InputDisplay({inputIp}: {inputIp: string}) {
     const {userData, getError, loading} = useSWRInputData(inputIp);
-    const {ipData} = useIpProvider();
 
     if(getError) return <p style={{color: "red", fontWeight: 700, textAlign: "center"}}>Failed to load</p>;
     if(loading) return <p style={{color: "green", fontWeight: 700, textAlign: "center"}}>Loading...</p>;
     return (
         <>
-            {ipData.isClicked && ipData.isValid && userData && <InfoDisplay userData={userData}/>}
-            {ipData.isClicked && ipData.isValid && userData && <MapNoSSR latitude={userData.location.lat} longitude={userData.location.lng}/>}
+            {userData && <InfoDisplay userData={userData}/>}
+            {userData.location.lat && userData.location.lng && <MapNoSSR latitude={userData.location.lat} longitude={userData.location.lng}/>}
         </>
     )
 }

@@ -4,15 +4,16 @@ import styles from './header.module.css';
 import { useIpProvider } from '../../../contexts/ipContext';
 import {useState} from 'react';
 
-function ErrorMessage({message}: {message: string}) {
-    return <p style={{color: "red", fontWeight: "700", textAlign: "center"}}>{message}</p>
-}
-
 export function Header() {
     const {ipData, updateIp, updateClickState, updateIsValid, updateIsCustomInput} = useIpProvider();
     const [userInput, setUserInput] = useState("");
     function onUserInput(event: any) {
-        event.target.value !== "" ? setUserInput(event.target.value) : updateIsCustomInput(false);
+        if(event.target.value !== "") {
+            setUserInput(event.target.value);
+        } else {
+            updateIsCustomInput(false);
+            updateClickState(false);
+        }
     }
     function onButtonClick(): any {
         updateClickState(true);
@@ -23,7 +24,6 @@ export function Header() {
             updateIp(userInput);
         } else {
             updateIsValid(false);
-            updateClickState(false);
         }
     }
     return (
@@ -32,7 +32,10 @@ export function Header() {
                 <section>
                     <h1>ip address tracker</h1>
                     <div className={styles.inputSection}>
-                        {!ipData.isValid && ipData.isClicked && <ErrorMessage message="Please enter a valid IP address!" />}
+                        <p style={{color: "red", fontWeight: "700", textAlign: "center"}}
+                        className={!ipData.isValid && ipData.isClicked ? styles.isEnabled : styles.isDisabled}>
+                            Please enter a valid Ip address!
+                        </p>
                         <input type="text" id="ip" name="ip" required
                         onChange={e => onUserInput(e)}
                         placeholder="Search for any IP address or domain" />

@@ -40,4 +40,13 @@
     background-color: #000;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    cursor: pointer
+}
+
+.isEnabled {
+    visibility: visible;
+}
+
+.isDisabled {
+    visibility: hidden;
 }
